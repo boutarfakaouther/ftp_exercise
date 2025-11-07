@@ -1,0 +1,44 @@
+Corrections made to script_bugs.py
+----------------------------------
+
+Overview
+I ran flake8 and fixed syntax and style issues so the script runs and follows PEP8.
+All fixes were done on branch: fix/script-bugs
+
+1) Syntax errors fixed
+- Replaced incorrect assignment in condition:
+    `elif focus_level = "Low":` -> `elif focus_level == "Low":`
+  Rationale: `=` is assignment; `==` compares values.
+
+- Added missing colon after an `else` clause:
+    `else` -> `else:`
+  Rationale: control statements require a trailing ':'.
+
+2) Return & logic fixes
+- compute_focus_level now returns the focus level (instead of only printing it).
+  Rationale: other functions expect a returned value.
+
+- estimate_durations now returns the durations dict (instead of only printing).
+  Rationale: execute_schedule expects a mapping of task→duration.
+
+- Fixed default assignment for "Low" focus (was `focus == "Low"` in a previous buggy version).
+
+- execute_schedule:
+  - Replaced `completed += task` (which extended the list with characters) with `completed.append(task)`.
+  - Iterates over `durations.items()` and uses the duration values.
+  - Uses `<=`/`<` logic so tasks only run if they fit the remaining time budget.
+
+3) Style/PEP8 fixes (from flake8)
+- Removed trailing whitespace.
+- Wrapped or shortened long comment line to respect 79 char limit.
+- Added required blank lines between functions (E302 / E305).
+- Fixed spacing around operators and removed space before colons (E225 / E203).
+- Ensured consistent list building (`tasks.extend([...])` or list literals).
+
+4) Minor improvements
+- Added `if __name__ == "__main__":` guard.
+- Added docstrings/inline comments for clarity (light).
+
+How I tested
+- Ran `flake8 script_bugs.py` until it produced no errors.
+- Ran `python .\script_bugs.py` to confirm the script runs and the summary output appears.

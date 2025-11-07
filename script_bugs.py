@@ -1,5 +1,6 @@
 # Activity Planner System
-# Simulates planning tasks over a day with decision-making and summary reporting
+# Simulates planning tasks over a day with decision-making
+# and summary reporting
 
 def compute_focus_level(hours_slept):
     if hours_slept < 0 or hours_slept > 24:
@@ -12,19 +13,21 @@ def compute_focus_level(hours_slept):
         focus == "Low"
     print("Focus level:", focus)
 
+
 def select_tasks(focus_level):
     tasks = []
     if focus_level == "High":
         tasks.append("Deep Work")
         tasks.append("Team Sync")
         tasks.append("Creative Writing")
-    elif focus_level=="Medium" :
+    elif focus_level == "Medium":
         tasks += "Emails", "Documentation"
-    elif focus_level = "Low":
+    elif focus_level == "Low":
         tasks = ["Break", "Stretching", "Meditation"]
     else:
         print("Unknown focus level")
     return tasks
+
 
 def estimate_durations(tasks):
     durations = {}
@@ -37,9 +40,10 @@ def estimate_durations(tasks):
             durations[task] = 30
         elif task == "Creative Writing":
             durations[task] = 60
-        else
+        else:
             durations[task] = 15
     print("Estimated durations:", durations)
+
 
 def execute_schedule(durations):
     completed = []
@@ -53,15 +57,17 @@ def execute_schedule(durations):
             print("Skipping:", task, "- Not enough time")
     return completed
 
+
 def summarize(completed_tasks, planned_tasks):
     print("Summary:")
     print("Planned:", planned_tasks)
     print("Completed:", completed_tasks)
-    missed = set(planned_tasks) -set(completed_tasks)
+    missed = set(planned_tasks) - set(completed_tasks)
     if len(missed) > 0:
         print("Missed:", missed)
     else:
         print("All tasks completed!")
+
 
 def main():
     hours_slept = 6
@@ -75,5 +81,6 @@ def main():
     estimate_durations(tasks)
     completed = execute_schedule(tasks)
     summarize(completed, tasks)
+
 
 main()
