@@ -43,6 +43,7 @@ def estimate_durations(tasks):
         else:
             durations[task] = 15
     print("Estimated durations:", durations)
+    return durations
 
 
 def execute_schedule(durations):
